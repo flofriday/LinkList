@@ -1,0 +1,24 @@
+<h1>Your Links</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.link_index_path(@socket, :index)}>
+    <.live_component
+      module={LinklistWeb.LinkLive.FormComponent}
+      id={@link.id || :new}
+      title={@page_title}
+      action={@live_action}
+      link={@link}
+      return_to={Routes.link_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<%= live_patch to: Routes.link_index_path(@socket, :new) do%>
+  <button class="button" >New Link</button>
+<% end %>
+
+<div id="links">
+  <%= for link <- @links do %>
+    <%= live_component @socket, LinklistWeb.LinkLive.LinkCard, id: link.id, link: link %>
+  <% end %>
+</div>

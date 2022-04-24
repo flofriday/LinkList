@@ -1,0 +1,41 @@
+<h1>Show Link</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.link_show_path(@socket, :show, @link)}>
+    <.live_component
+      module={LinklistWeb.LinkLive.FormComponent}
+      id={@link.id}
+      title={@page_title}
+      action={@live_action}
+      link={@link}
+      return_to={Routes.link_show_path(@socket, :show, @link)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @link.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @link.description %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @link.url %>
+  </li>
+
+  <li>
+    <strong>Image url:</strong>
+    <%= @link.image_url %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.link_show_path(@socket, :edit, @link), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.link_index_path(@socket, :index) %></span>
