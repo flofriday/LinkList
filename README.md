@@ -1,5 +1,7 @@
 # LinkList
 
+![Screenshot 2022-05-01 at 22 29 08](https://user-images.githubusercontent.com/21206831/166163459-c8ebae1e-6361-4d80-93b6-86e43e849cd9.png)
+
 [WIP] A tool to manage and share the articles hackers read.
 
 To start your Phoenix server:
