@@ -1,24 +1,54 @@
-<h1>Your Links</h1>
+<style>
+  .lead-img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+</style>
 
-<%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.link_index_path(@socket, :index)}>
-    <.live_component
-      module={LinklistWeb.LinkLive.FormComponent}
-      id={@link.id || :new}
-      title={@page_title}
-      action={@live_action}
-      link={@link}
-      return_to={Routes.link_index_path(@socket, :index)}
-    />
-  </.modal>
-<% end %>
+<!-- The Profile top part. -->
+<!-- TODO: fix for mobile -->
+<div class="container-md p-3 clearfix">
+  <div class="col-md float-left">
+    <img class="lead-img" src="https://avatars.githubusercontent.com/u/21206831?v=4">
+  </div>
+  <div class="col-8 float-left p-4">
+    <h1 class="h1">flofriday</h1>
+    <p>
+      Computer-science student at TU Wien (Austria). Interested in all things related to computers from webservers over
+      games
+      to simple scripts. He/him.
+    </p>
+    <a href="https://github.com/flofriday" class="btn btn-outline" role="button">GitHub</a>
+  </div>
+</div>
 
-<%= live_patch to: Routes.link_index_path(@socket, :new) do%>
-  <button class="button" >New Link</button>
-<% end %>
+<div class="container-sm p-3">
+  <form class="d-flex mb-4">
+    <input class="form-control input-lg flex-1 mr-2" type="text" placeholder="Find a link..."
+      aria-label="Find a link..." />
+    <%= live_patch to: Routes.link_index_path(@socket, :new) do%>
+      <button class="btn btn-primary mr-2" type="button">
+        <svg  class="octicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.229a.75.75 0 001.06 1.061l1.225-1.224v6.184a.75.75 0 001.5 0V9.066l1.224 1.224z"></path></svg>
+        <span>New</span>
+      </button>
+      <% end %>
+  </form>
 
-<div id="links">
-  <%= for link <- @links do %>
-    <%= live_component @socket, LinklistWeb.LinkLive.LinkCard, id: link.id, link: link %>
-  <% end %>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal return_to={Routes.link_index_path(@socket, :index)}>
+      <.live_component module={LinklistWeb.LinkLive.FormComponent} id={@link.id || :new} title={@page_title}
+        action={@live_action} link={@link} return_to={Routes.link_index_path(@socket, :index)} />
+    </.modal>
+    <% end %>
+
+
+      <div id="links">
+        <%= for link <- @links do %>
+          <%= live_component LinklistWeb.LinkLive.LinkCard, id: link.id, link: link %>
+            <% end %>
+      </div>
+
 </div>

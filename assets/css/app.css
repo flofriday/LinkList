@@ -1,5 +1,12 @@
 /* This file is for your main application CSS */
-@import "./phoenix.css";
+@import "./primer.css";
+
+/* Custom CSS rules */
+.card-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
 
 /* Alerts and form errors used by phx.new */
 .alert {

@@ -1,4 +1,15 @@
 <main class="container">
+ <div class="flash-messages m-3">
+    <!-- <div class="flash"><%= live_flash(@flash, :info) %></div> -->
+    <%= if live_flash(@flash, :info) do %>
+    <div class="flash mb-3"><%= live_flash(@flash, :info) %></div>
+    <% end %>
+    <%= if live_flash(@flash, :error) do %>
+    <div class="flash mb-3 flash-error"><%= live_flash(@flash, :error) %></div>
+    <% end %>
+  </div>
+
+  <!--
   <p class="alert alert-info" role="alert"
     phx-click="lv:clear-flash"
     phx-value-key="info"><%= live_flash(@flash, :info) %></p>
@@ -6,6 +17,7 @@
   <p class="alert alert-danger" role="alert"
     phx-click="lv:clear-flash"
     phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+  -->
 
   <%= @inner_content %>
 </main>

@@ -19,7 +19,7 @@ defmodule Linklist.LinksView do
 
   """
   def list_links do
-    Repo.all(Link)
+    Repo.all(from l in Link, order_by: [desc: l.inserted_at])
   end
 
   @doc """
