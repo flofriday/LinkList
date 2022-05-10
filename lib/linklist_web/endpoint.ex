@@ -43,6 +43,13 @@ defmodule LinklistWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
+  plug Plug.Session,
+    store: :cookie,
+    key: "_linklist_key",
+    signing_salt: "u4ME1RYK"
+
+  plug Pow.Plug.Session, otp_app: :linklist
+
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options

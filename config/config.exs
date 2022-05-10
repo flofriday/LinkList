@@ -17,6 +17,10 @@ config :linklist, LinklistWeb.Endpoint,
   pubsub_server: Linklist.PubSub,
   live_view: [signing_salt: "VV3OMXp8"]
 
+config :linklist, :pow,
+  user: Linklist.Users.User,
+  repo: Linklist.Repo
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

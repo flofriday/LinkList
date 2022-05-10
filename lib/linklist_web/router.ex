@@ -1,5 +1,6 @@
 defmodule LinklistWeb.Router do
   use LinklistWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,8 +15,19 @@ defmodule LinklistWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", LinklistWeb do
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  scope "/" do
     pipe_through :browser
+
+    pow_routes()
+  end
+
+  scope "/", LinklistWeb do
+    pipe_through [:browser]
 
     get "/", PageController, :index
 
